@@ -3,12 +3,37 @@
     --cor-fonte: #eaeaea;
     --cor-fonte-sec: #bebebf;
 
+    font-size: 16px;
+    
 }
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+}
+::-webkit-scrollbar-track {
+    background: var(--cor-fundo);        /* color of the tracking area */
+}
+::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(#d39e3388, #ed563688, #633bbc88);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 2px solid var(--cor-fundo); /*  creates padding around scroll thumb */
+}
+
+@keyframes entering{
+    from{
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 body{
@@ -26,20 +51,8 @@ nav{
     padding: 64px;
     grid-area: timeline;
     overflow-y: scroll;
-}
 
-nav::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-}
-  
-nav::-webkit-scrollbar-track {
-    background: var(--cor-fundo);        /* color of the tracking area */
-}
-
-nav::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(#d39e3344, #ed563644, #633bbc44);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid var(--cor-fundo);  /* creates padding around scroll thumb */
+    animation: entering 1s ease-in-out;
 }
 
 .post{
@@ -58,12 +71,19 @@ nav::-webkit-scrollbar-thumb {
 
 .post small{
     color: var(--cor-fonte-sec);
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .post h1{
-    font-size: 32;
+    font-size: 2rem;
     
+}
+
+.post div{
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .post img{
@@ -71,11 +91,17 @@ nav::-webkit-scrollbar-thumb {
     height: 350px;
     object-fit: cover;
     border-radius: 8px;
+
+    transition: transform 0.5s ease-in-out;
+}
+
+.post:hover img{
+    transform: scale(1.1);
 }
 
 .post p{
     color: var(--cor-fonte-sec);
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 28px;
 }
 
@@ -108,13 +134,43 @@ aside .foto-perfil{
 }
 
 aside p{
-    font-size: 32px;
+    font-size: 2rem;
     text-align: center;
     line-height: 40px;
 }
 
 aside span{
-    font-size: 12px;
+    font-size: 0.75rem;
     text-align: center;
     color: #9e9e9e;
+}
+
+aside *{
+    animation: entering 1s ease-in-out;
+}
+
+@media (max-width: 768px){
+    :root{
+        font-size: 14px;
+    }
+
+    body{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 0.8fr;
+        grid-template-areas: 
+        "profile"
+        "timeline";
+    }
+
+    aside{
+        border-right: none;
+        padding: 32px 12px;
+
+        gap: 15px;
+    }
+
+    nav{
+        overflow-y: visible;
+        padding: 22px;
+    }
 }
